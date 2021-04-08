@@ -23,51 +23,30 @@ const getWeek = (props) => {
 // Returns the four-digit year corresponding to the ISO week of the date.
 
 function App() {
-  const [year, setYear] = useState(2021);
+  /*  const [year, setYear] = useState(2021);
+  const [days, setDays] = useState([]);
 
   useEffect(() => {
-    let twentyOne = [];
-    let date = new Date();
-    date.setFullYear(year, 0, 10);
-    date.setHours(0, 0, 0, 0);
+    if (!days.length) {
+      for (let i = 1; i < 364; i++) {
+        let date = new Date();
 
-    console.log(getWeek(date));
+        date.setFullYear(year, 0, 1);
+        date.setHours(0, 0, 0, 0);
+        date.setDate(date.getDate() + i);
+        setDays((prevDays) => [...prevDays, { date }]);
+      }
+    }
     return () => {};
-  }, [year]);
-
-  const style = {
-    top: `${date.getDay() * 12}px`,
-    left: `${getWeek(date) === 53 ? 1 : getWeek(date) * 12}px`,
-  };
-
-  let twentyOne = [];
-  let date = new Date();
+  }, []);
+  console.log(days); */
 
   return (
-    <>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-      <div className="rect"></div>
-    </>
+    <div className="container flex">
+      {[...Array(365)].map(() => (
+        <div className="rect"></div>
+      ))}
+    </div>
   );
 }
 
