@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getTasks = () => axios.get("http://localhost:5000/task");
-export const creteTask = (title) =>
+export const createTask = (title) =>
   axios.post("http://localhost:5000/task", title);
 export const submitToTask = (id, comment) =>
   axios.post(`http://localhost:5000/task/${id}`, comment);
