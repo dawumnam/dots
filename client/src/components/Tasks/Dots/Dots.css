@@ -1,0 +1,31 @@
+.dots-wrapper {
+  margin: 2rem;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100px;
+  width: fit-content;
+  gap: 3px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(53, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  width: fit-content;
+  height: fit-content;
+  justify-content: center;
+  align-items: center;
+}
+.rect {
+  width: 10px;
+  height: 10px;
+  background-color: #ebedf0;
+  shape-rendering: geometricPrecision;
+  outline-offset: -1px;
+  outline: solid 1px rgba(27, 31, 35, 0.06);
+  border-radius: 1px;
+}
