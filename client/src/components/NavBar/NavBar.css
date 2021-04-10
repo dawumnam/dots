@@ -1,0 +1,40 @@
+.logo i {
+  display: inline-block;
+  color: #30a14e;
+}
+
+.logo h1 {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.logo {
+  justify-self: flex-start;
+}
+
+.nav-wrapper {
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: auto;
+}
+
+.newtitle-form-input {
+  border: none;
+  border: rgba(0, 0, 0, 0.1) solid 1px;
+  min-height: 32px;
+  border-radius: 10px;
+  padding: 5px;
+}
+.newtitle-form-submit-button {
+  width: 80px;
+  min-height: 32px;
+  border: none;
+  background-color: inherit;
+}
+.newtitle-form-submit-button:hover {
+  border: rgba(0, 0, 0, 0.2) 1px solid;
+  border-radius: 5px;
+}

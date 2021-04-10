@@ -1,0 +1,74 @@
+.tasks-container {
+  width: 100%;
+  height: auto;
+}
+
+.task-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.delete-button {
+  margin: 1rem;
+  width: 80px;
+  min-height: 32px;
+  border: none;
+  background-color: inherit;
+}
+
+.delete-button:hover {
+  border: rgba(0, 0, 0, 0.2) 1px solid;
+  border-radius: 5px;
+}
+
+.comment-submit-button {
+  margin: 1rem;
+  width: 80px;
+  min-height: 32px;
+  border: none;
+  background-color: inherit;
+}
+
+.comment-submit-button:hover {
+  border: rgba(0, 0, 0, 0.2) 1px solid;
+  border-radius: 5px;
+}
+
+.task-comment-form {
+}
+
+.comment-submit-form {
+}
+
+.comment-submit-input {
+  border: none;
+  border-bottom: rgba(0, 0, 0, 0.1) solid 1px;
+  min-height: 32px;
+  padding: 5px;
+}
+
+.task-title {
+  text-align: center;
+  margin: 1rem;
+}
+
+.bottom-border {
+  width: 80%;
+  border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
+  margin: 1rem auto;
+}
+
+.dots-forms-wrapper {
+  width: 80%;
+  height: fit-content;
+  margin: auto;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem 0;
+}
