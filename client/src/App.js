@@ -9,13 +9,13 @@ function App() {
   const [tasks, setTasks] = useState("");
   return (
     <div className="body">
-      <NavBar
-        title={title}
-        setTitle={setTitle}
-        setTasks={setTasks}
-        tasks={tasks}
-      />
       <div className="content">
+        <NavBar
+          title={title}
+          setTitle={setTitle}
+          setTasks={setTasks}
+          tasks={tasks}
+        />
         <Tasks tasks={tasks} setTasks={setTasks} />
       </div>
     </div>

@@ -24,7 +24,7 @@ function NavBar(props) {
         <label>
           <input
             className="newtitle-form-input"
-            placeholder="More tasks..."
+            placeholder="  More tasks..."
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
