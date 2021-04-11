@@ -29,13 +29,25 @@
   margin-right: 10px;
   border-radius: 10px;
 }
+.signin-button {
+  width: 80px;
+  min-height: 32px;
+  border: rgba(0, 0, 0, 0.2) 1px solid;
+  border-radius: 5px;
+
+  background-color: inherit;
+}
+.signin-button:hover {
+  border: rgba(0, 0, 0, 0.5) 1px solid;
+}
 .newtitle-form-submit-button {
   width: 80px;
   min-height: 32px;
-  border: none;
+  border: rgba(0, 0, 0, 0.2) 1px solid;
+  border-radius: 5px;
+
   background-color: inherit;
 }
 .newtitle-form-submit-button:hover {
-  border: rgba(0, 0, 0, 0.2) 1px solid;
-  border-radius: 5px;
+  border: rgba(0, 0, 0, 0.5) 1px solid;
 }
