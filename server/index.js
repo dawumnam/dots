@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import taskRoutes from "./routes/task.js";
+import authRoutes from "./routes/auth.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
@@ -12,6 +15,7 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(cors());
 app.use("/task", taskRoutes);
+app.use("/auth", authRoutes);
 
 mongoose
   .connect("mongodb://127.0.0.1:27017", {
