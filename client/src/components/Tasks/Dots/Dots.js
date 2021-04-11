@@ -14,6 +14,26 @@ function Dots(props) {
           "#30a14e";
       });
 
+    const dummy = () => {
+      let dummyArray = [];
+      for (let i = 0; i < 30; i++) {
+        let date = new Date();
+        date.setFullYear(
+          2021,
+          Math.floor(Math.random() * 12),
+          Math.floor(Math.random() * 29)
+        );
+        date.setHours(0, 0, 0, 0);
+        const newDate = date.toISOString().split("T")[0];
+        dummyArray.push(newDate);
+        dummyArray.forEach((e) => {
+          document.getElementById(`${e}-${taskId}`).style.backgroundColor =
+            "#30a14e";
+        });
+      }
+    };
+    dummy();
+
     return () => {};
   }, []);
   return (
