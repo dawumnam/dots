@@ -12,7 +12,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
-    return () => {};
+    const user = localStorage?.getItem("user");
+    if (user) setCurrentUser(JSON.parse(user));
   }, []);
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ function App() {
             setTasks={setTasks}
             tasks={tasks}
             currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
           />
           <Switch>
             <Route exact path="/">

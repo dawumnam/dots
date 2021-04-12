@@ -52,20 +52,37 @@ export const signin = async (req, res) => {
       throw new Error("Wrong Password");
 
     const cookie = jwt.sign(
-      { name: existingUser.name, email: existingUser.email },
+      { name: existingUser.name, id: existingUser._id },
       process.env.PHRASE,
       { expiresIn: "1h" }
     );
     return res
       .cookie("cookie", cookie, {
         maxAge: ONE_HOUR_IN_MILISECONDS,
+        httpOnly: true,
       })
       .json({
         name: existingUser.name,
         _id: existingUser._id,
-        email: existingUser.email,
       });
   } catch (error) {
     return res.status(400).json({ message: error.message });
+  }
+};
+
+export const signout = async (req, res) => {
+  try {
+    const cookie = req.headers.cookie.split("=")[1];
+    const result = jwt.verify(cookie, process.env.PHRASE);
+    if (!result?.id)
+      return res
+        .status(400)
+        .json({ success: false, message: "signin auth failed" });
+
+    return res
+      .clearCookie("cookie")
+      .json({ success: true, message: "successfully signed out" });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
   }
 };

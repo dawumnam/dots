@@ -1,16 +1,30 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { createTask } from "../../api/task";
-
+import { signout } from "../../api/auth";
 import "./NavBar.css";
 
 function NavBar(props) {
-  const { title, setTitle, setTasks, tasks, currentUser } = props;
+  const {
+    title,
+    setTitle,
+    setTasks,
+    tasks,
+    currentUser,
+    setCurrentUser,
+  } = props;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data: newTask } = await createTask({ title });
     setTasks([...tasks, newTask]);
     setTitle("");
+  };
+
+  const handleSignout = async (e) => {
+    e.preventDefault();
+    await signout();
+    setCurrentUser({});
+    localStorage.clear();
   };
 
   return (
@@ -39,6 +53,9 @@ function NavBar(props) {
               value="Submit"
             />
           </form>
+          <div className="signout-button" onClick={handleSignout}>
+            Signout
+          </div>
         </>
       ) : (
         <Link to="/auth">

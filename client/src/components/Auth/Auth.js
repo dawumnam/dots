@@ -19,8 +19,15 @@ function Auth(props) {
     e.preventDefault();
     if (isSignin) {
       const response = await signin(user);
+      localStorage.setItem("user", JSON.stringify(response.data));
       setCurrentUser(response.data);
-      console.log(document.cookie);
+    }
+
+    if (!isSignin) {
+      const response = await signup(user);
+      localStorage.setItem("user", JSON.stringify(response.data));
+
+      setCurrentUser(response.data);
     }
     history.push("/");
   };
