@@ -70,7 +70,7 @@ export const signin = async (req, res) => {
   }
 };
 
-export const signout = async (req, res) => {
+export const signout = (req, res) => {
   try {
     const cookie = req.headers.cookie.split("=")[1];
     const result = jwt.verify(cookie, process.env.PHRASE);

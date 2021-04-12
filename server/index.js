@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import taskRoutes from "./routes/task.js";
 import authRoutes from "./routes/auth.js";
 import dotenv from "dotenv";
+import { createMailTransporter } from "./utils/mail.js";
+
 dotenv.config();
 
 const app = express();
@@ -31,3 +33,5 @@ mongoose
     app.listen(PORT, () => console.log(`Server started at Port:${PORT}`))
   )
   .catch((error) => console.log(error));
+
+createMailTransporter().catch(console.error);
