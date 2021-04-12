@@ -22,7 +22,7 @@ function NavBar(props) {
 
   const handleSignout = async (e) => {
     e.preventDefault();
-    await signout();
+    await signout(currentUser);
     setCurrentUser({});
     localStorage.clear();
   };

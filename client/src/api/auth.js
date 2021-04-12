@@ -10,8 +10,8 @@ export const signup = (authInfo) =>
     withCredentials: true,
   });
 
-export const signout = () => {
-  axios.delete("http://localhost:5000/auth/signout", {
+export const signout = (authInfo) => {
+  axios.post("http://localhost:5000/auth/signout", authInfo, {
     withCredentials: true,
   });
 };

@@ -74,7 +74,10 @@ export const signout = async (req, res) => {
   try {
     const cookie = req.headers.cookie.split("=")[1];
     const result = jwt.verify(cookie, process.env.PHRASE);
-    if (!result?.id)
+    const id = req.body._id;
+    const _id = result.id;
+
+    if (_id !== id)
       return res
         .status(400)
         .json({ success: false, message: "signin auth failed" });
