@@ -5,6 +5,7 @@ import taskRoutes from "./routes/task.js";
 import authRoutes from "./routes/auth.js";
 import dotenv from "dotenv";
 import { createMailTransporter } from "./utils/mail.js";
+import { createTestAccount } from "nodemailer";
 
 dotenv.config();
 
@@ -34,4 +35,4 @@ mongoose
   )
   .catch((error) => console.log(error));
 
-createMailTransporter().catch(console.error);
+//createMailTransporter();
