@@ -5,9 +5,8 @@ export const authMiddleware = async (req, res, next) => {
   const cookie = req.headers.cookie?.split("=")[1];
   if (!cookie) return res.status(400).json({ message: "Unauthorized request" });
 
-  const { id, name } = jwt?.verify(cookie, process.env.PHRASE);
-  if (!id || !name)
-    return res.status(400).json({ message: "Unauthorized request" });
+  const { id } = jwt?.verify(cookie, process.env.PHRASE);
+  if (!id) return res.status(400).json({ message: "Unauthorized request" });
 
   req.id = id;
 

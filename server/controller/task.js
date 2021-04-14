@@ -50,7 +50,8 @@ export const deleteTask = async (req, res) => {
 
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const creatorId = req.id;
+    const tasks = await Task.find({ creatorId });
     return res.status(200).json(tasks);
   } catch (error) {
     return res.status(500).json(error.messsage);

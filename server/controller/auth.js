@@ -3,6 +3,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Auth from "../model/auth.js";
 import { authMiddleware } from "../middleware/auth.js";
+import { createMailTransporter } from "../utils/mail.js";
+import { makeid } from "../utils/utils.js";
+import nodemailer from "nodemailer";
 
 const ONE_HOUR_IN_MILISECONDS = 1000 * 60 * 60;
 
@@ -88,5 +91,66 @@ export const signout = (req, res) => {
       .json({ success: true, message: "successfully signed out" });
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export const sendPasswordRecoveryCode = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const existing = await Auth.findOne({ email });
+    if (!existing) res.status(400).json({ message: "No such user exists" });
+    const recoveryCode = makeid(10).toUpperCase();
+
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.ID, // generated ethereal user
+        pass: process.env.PW, // generated ethereal password
+      },
+    });
+
+    await transporter.sendMail({
+      from: '"Dawum Nam" <dawumnam@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: "Password Recovery", // Subject line
+      text: recoveryCode, // plain text body
+      html: `<b>${recoveryCode}</b>`, // html body
+    });
+
+    await Auth.findOneAndUpdate({ email }, { passwordRecovery: recoveryCode });
+
+    res
+      .status(200)
+      .json({ message: "successfully sent code via email", success: true });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ message: "unsuccessful", success: false });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  try {
+    const { recoveryCode, email, newPassword } = req.body;
+    if (!recoveryCode || !email)
+      return res
+        .status(400)
+        .json({ message: "Missing code or email", success: false });
+    const { passwordRecovery } = await Auth.findOne({ email });
+    if (recoveryCode !== passwordRecovery)
+      return res
+        .status(400)
+        .json({ message: "Invalid recovery code", success: false });
+    const encryptedNewPassword = bcrypt.hashSync(String(newPassword), 12);
+
+    await Auth.findOneAndUpdate(
+      { email },
+      { password: encryptedNewPassword, passwordRecovery: "" }
+    );
+    res.json({ message: "Password successfully changed", success: true });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(400)
+      .json({ mesage: "Failed to change password", success: false });
   }
 };

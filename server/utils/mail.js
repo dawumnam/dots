@@ -1,8 +1,6 @@
 import nodemailer from "nodemailer";
 
 export const createMailTransporter = async () => {
-  let testAccount = await nodemailer.createTestAccount();
-
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -12,6 +10,8 @@ export const createMailTransporter = async () => {
     },
   });
 
+  return transporter;
+  /* 
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"Dawum Nam" <dawumnam@gmail.com>', // sender address
@@ -26,5 +26,5 @@ export const createMailTransporter = async () => {
 
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou... */
 };

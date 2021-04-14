@@ -45,5 +45,3 @@ mongoose
 // client gets new password from user and sends it to the server
 // server changes the password and removes token.
 // client redirects user to main page
-
-//get tasks filtered by id
