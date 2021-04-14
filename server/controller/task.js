@@ -4,8 +4,9 @@ import Task from "../model/task.js";
 
 export const createTask = async (req, res) => {
   try {
+    const creatorId = req.id;
     let task = req.body;
-    const newTask = new Task(task);
+    const newTask = new Task({ ...task, creatorId });
     await newTask.save();
     return res.json(newTask);
   } catch (error) {

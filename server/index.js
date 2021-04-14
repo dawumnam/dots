@@ -36,3 +36,14 @@ mongoose
   .catch((error) => console.log(error));
 
 //createMailTransporter();
+
+//client send password recovery request with email data and redirect user to enter the recovery key
+//server receives email and checks if such account exists. if it does send email with randomly generated recovery key
+// user checks email and enters the key
+//client receives the recovery key and send to the server
+// server verifies the key and send ok request and sends token
+// client gets new password from user and sends it to the server
+// server changes the password and removes token.
+// client redirects user to main page
+
+//get tasks filtered by id

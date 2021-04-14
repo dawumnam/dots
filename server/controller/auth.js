@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Auth from "../model/auth.js";
+import { authMiddleware } from "../middleware/auth.js";
 
 const ONE_HOUR_IN_MILISECONDS = 1000 * 60 * 60;
 

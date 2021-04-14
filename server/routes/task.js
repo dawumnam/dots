@@ -6,12 +6,14 @@ import {
   getTasks,
 } from "../controller/task.js";
 
+import { authMiddleware, checkOwner } from "../middleware/auth.js";
+
 const router = express.Router();
 
-router.get("/", getTasks);
-router.post("/", createTask);
-router.post("/:id", submitToTask);
+router.get("/", authMiddleware, getTasks);
+router.post("/", authMiddleware, createTask);
+router.post("/:id", authMiddleware, checkOwner, submitToTask);
 //router.patch("/:id", updateTask);
-router.delete("/:id", deleteTask);
+router.delete("/:id", authMiddleware, checkOwner, deleteTask);
 
 export default router;
