@@ -4,7 +4,6 @@ import "./ForgotPassword.css";
 import * as auth from "../../api/auth";
 
 function ForgotPassword() {
-  const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
   const [isForgot, setIsForgot] = useState(true);
   const [newAuthInfo, setNewAuthInfo] = useState({});
@@ -25,7 +24,7 @@ function ForgotPassword() {
   const handleNewSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await auth.verifyRecoveryCode(newAuthInfo);
+      await auth.verifyRecoveryCode(newAuthInfo);
       alert("Please sign in with your new password");
       history.push("/signin");
     } catch (error) {
