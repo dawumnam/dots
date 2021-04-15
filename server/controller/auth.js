@@ -98,7 +98,8 @@ export const sendPasswordRecoveryCode = async (req, res) => {
   try {
     const { email } = req.body;
     const existing = await Auth.findOne({ email });
-    if (!existing) res.status(400).json({ message: "No such user exists" });
+    if (!existing)
+      return res.status(400).json({ message: "No such user exists" });
     const recoveryCode = makeid(10).toUpperCase();
 
     let transporter = nodemailer.createTransport({
@@ -108,34 +109,41 @@ export const sendPasswordRecoveryCode = async (req, res) => {
         pass: process.env.PW, // generated ethereal password
       },
     });
-
+    /* 
     await transporter.sendMail({
       from: '"Dawum Nam" <dawumnam@gmail.com>', // sender address
       to: email, // list of receivers
       subject: "Password Recovery", // Subject line
       text: recoveryCode, // plain text body
       html: `<b>${recoveryCode}</b>`, // html body
-    });
+    }); */
 
-    await Auth.findOneAndUpdate({ email }, { passwordRecovery: recoveryCode });
+    await Auth.findOneAndUpdate(
+      { email },
+      { passwordRecovery: recoveryCode },
+      { useFindAndModify: false }
+    );
 
-    res
+    return res
       .status(200)
       .json({ message: "successfully sent code via email", success: true });
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: "unsuccessful", success: false });
+    return res.status(400).json({ message: "unsuccessful", success: false });
   }
 };
 
 export const changePassword = async (req, res) => {
   try {
-    const { recoveryCode, email, newPassword } = req.body;
-    if (!recoveryCode || !email)
+    const body = req.body;
+    const { recoveryCode, email, newPassword } = body;
+    console.log(req.body);
+    if (!recoveryCode || !email || !newPassword)
       return res
         .status(400)
         .json({ message: "Missing code or email", success: false });
     const { passwordRecovery } = await Auth.findOne({ email });
+    console.log(passwordRecovery);
     if (recoveryCode !== passwordRecovery)
       return res
         .status(400)
@@ -146,10 +154,13 @@ export const changePassword = async (req, res) => {
       { email },
       { password: encryptedNewPassword, passwordRecovery: "" }
     );
-    res.json({ message: "Password successfully changed", success: true });
+    return res.json({
+      message: "Password successfully changed",
+      success: true,
+    });
   } catch (error) {
     console.log(error);
-    res
+    return res
       .status(400)
       .json({ mesage: "Failed to change password", success: false });
   }

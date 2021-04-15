@@ -3,8 +3,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Tasks from "./components/Tasks/Tasks";
 import NavBar from "./components/NavBar/NavBar";
 import Auth from "./components/Auth/Auth";
+import Forgot from "./components/ForgotPassword/ForgotPassword";
 
 import "./App.css";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -33,6 +35,10 @@ function App() {
             </Route>
             <Route exact path="/auth">
               <Auth setCurrentUser={setCurrentUser} />
+            </Route>
+
+            <Route exact path="/forgot">
+              <ForgotPassword />
             </Route>
           </Switch>
         </div>

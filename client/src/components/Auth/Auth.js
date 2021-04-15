@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { signin, signup } from "../../api/auth";
+import ForgotPassword from "../ForgotPassword/ForgotPassword";
 
 import "./Auth.css";
 
@@ -14,6 +15,10 @@ function Auth(props) {
     email: "",
   });
   const [isSignin, setIsSignin] = useState(true);
+
+  const handleForgotPasswordClick = () => {
+    history.push("/forgot");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,9 +82,14 @@ function Auth(props) {
         <input className="button" type="submit" value="Submit" />
       </form>
       {isSignin ? (
-        <button className="sign button" onClick={handleClick}>
-          Sign up
-        </button>
+        <>
+          <button className="sign button" onClick={handleClick}>
+            Sign up
+          </button>
+          <button className="sign button" onClick={handleForgotPasswordClick}>
+            Forgot password?
+          </button>
+        </>
       ) : (
         <button className="sign button" onClick={handleClick}>
           Sign in

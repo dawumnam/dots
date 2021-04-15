@@ -20,3 +20,8 @@
   width: clamp(690px, 70%, 1000px);
   background-color: white;
 }
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}

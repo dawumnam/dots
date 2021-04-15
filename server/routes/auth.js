@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/signin", signin);
 router.post("/signup", signup);
 router.post("/signout", authMiddleware, signout);
-router.get("/passwordrecovery", sendPasswordRecoveryCode);
+router.post("/passwordrecovery", sendPasswordRecoveryCode);
 router.patch("/changepassword", changePassword);
 
 export default router;
