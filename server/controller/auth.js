@@ -109,15 +109,13 @@ export const sendPasswordRecoveryCode = async (req, res) => {
         pass: process.env.PW, // generated ethereal password
       },
     });
-    /* 
     await transporter.sendMail({
-      from: '"Dawum Nam" <dawumnam@gmail.com>', // sender address
+      from: '"dawum nam" <dawumnam@gmail.com>', // sender address
       to: email, // list of receivers
-      subject: "Password Recovery", // Subject line
+      subject: "password recovery", // subject line
       text: recoveryCode, // plain text body
       html: `<b>${recoveryCode}</b>`, // html body
-    }); */
-
+    });
     await Auth.findOneAndUpdate(
       { email },
       { passwordRecovery: recoveryCode },
@@ -142,7 +140,10 @@ export const changePassword = async (req, res) => {
       return res
         .status(400)
         .json({ message: "Missing code or email", success: false });
-    const { passwordRecovery } = await Auth.findOne({ email });
+    const { passwordRecovery } = await Auth.findOne(
+      { email },
+      { useFindAndModify: false }
+    );
     console.log(passwordRecovery);
     if (recoveryCode !== passwordRecovery)
       return res
