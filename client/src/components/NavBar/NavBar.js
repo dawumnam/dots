@@ -51,7 +51,7 @@ function NavBar(props) {
             />
           </form>
           <div className="signout-button" onClick={handleSignout}>
-            Signout
+            Sign out
           </div>
         </>
       ) : (

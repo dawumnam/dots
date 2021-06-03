@@ -34,11 +34,26 @@
   min-height: 32px;
   border: rgba(0, 0, 0, 0.2) 1px solid;
   border-radius: 5px;
-
-  background-color: inherit;
+  background-color: #fefefe;
 }
 .signin-button:hover {
   border: rgba(0, 0, 0, 0.5) 1px solid;
+}
+
+.signout-button {
+  width: 80px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  border: rgba(0, 0, 0, 0.2) 1px solid;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.signout-button:hover {
+  border: rgba(0, 0, 0, 0.5) 1px solid;
+  width: 80px;
+  height: 32px;
 }
 .newtitle-form-submit-button {
   width: 80px;
