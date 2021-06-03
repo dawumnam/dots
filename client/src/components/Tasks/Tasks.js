@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Dots from "./Dots/Dots";
 import { submitToTask, createTask, deleteTask, getTasks } from "../../api/task";
 
@@ -7,6 +8,7 @@ import "./Tasks.css";
 function Tasks(props) {
   const { setTasks, tasks } = props;
   const [commentObj, setCommentObj] = useState({ comment: "", id: "" });
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchData() {
@@ -15,6 +17,7 @@ function Tasks(props) {
       setTasks(response.data);
       // ...
     }
+    if (!localStorage.getItem("user")) history.push("/auth");
     fetchData();
     return () => {};
   }, []);
@@ -39,7 +42,7 @@ function Tasks(props) {
 
   return (
     <div className="tasks-container">
-      {tasks.length &&
+      {tasks?.length &&
         tasks.map((e) => (
           <div
             className="task-container"

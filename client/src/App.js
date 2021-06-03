@@ -36,7 +36,6 @@ function App() {
             <Route exact path="/auth">
               <Auth setCurrentUser={setCurrentUser} />
             </Route>
-
             <Route exact path="/forgot">
               <ForgotPassword />
             </Route>

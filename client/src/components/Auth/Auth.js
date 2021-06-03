@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { signin, signup } from "../../api/auth";
 import ForgotPassword from "../ForgotPassword/ForgotPassword";
@@ -40,6 +40,12 @@ function Auth(props) {
   const handleClick = () => {
     setIsSignin((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (localStorage?.getItem("user")) history.push("/");
+    return () => {};
+  }, []);
+
   return (
     <div className="auth-wrapper">
       <form className="auth-content" onSubmit={handleSubmit}>
@@ -83,17 +89,21 @@ function Auth(props) {
       </form>
       {isSignin ? (
         <>
-          <button className="sign button" onClick={handleClick}>
-            Sign up
-          </button>
-          <button className="sign button" onClick={handleForgotPasswordClick}>
-            Forgot password?
-          </button>
+          <div className="sign-button-Wrapper">
+            <button className="sign button" onClick={handleClick}>
+              Sign up
+            </button>
+            <button className="sign button" onClick={handleForgotPasswordClick}>
+              Forgot password?
+            </button>
+          </div>
         </>
       ) : (
-        <button className="sign button" onClick={handleClick}>
-          Sign in
-        </button>
+        <div className="sign-button-Wrapper">
+          <button className="sign button" onClick={handleClick}>
+            Sign in
+          </button>
+        </div>
       )}
     </div>
   );

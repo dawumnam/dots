@@ -1,18 +1,13 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { createTask } from "../../api/task";
 import { signout } from "../../api/auth";
 import "./NavBar.css";
 
 function NavBar(props) {
-  const {
-    title,
-    setTitle,
-    setTasks,
-    tasks,
-    currentUser,
-    setCurrentUser,
-  } = props;
+  const { title, setTitle, setTasks, tasks, currentUser, setCurrentUser } =
+    props;
+  const history = useHistory();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data: newTask } = await createTask({ title });
@@ -22,9 +17,11 @@ function NavBar(props) {
 
   const handleSignout = async (e) => {
     e.preventDefault();
-    await signout(currentUser);
+    signout(currentUser);
+    setTasks({});
     setCurrentUser({});
     localStorage.clear();
+    history.push("/auth");
   };
 
   return (
